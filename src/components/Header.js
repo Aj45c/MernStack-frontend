@@ -1,8 +1,12 @@
-import React from 'react';
+import { Link } from 'react-router-dom'
 
 const Head = (props) => {
     return (
-        <h1>This is the Header!</h1>
+        <nav className = 'nav'>
+            <Link to  = "/">
+                <div>People App</div>
+            </Link>
+        </nav>
     )
 }
 
