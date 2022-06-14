@@ -5,9 +5,7 @@ const Show = (props) => {
    
     const avatarURL = "https://baycityfireworksfestival.com/wp-content/uploads/2019/03/avatar-1577909_960_720.png"
     const id = props.match.params.id;
-    const person = props.people.find(function(p) {
-        return p.__id === id
-    });
+    const person = props.people.find(p =>  p._id === id); 
     const [editForm, setEditForm] = useState(person);
     
     const handleChange = (event) => {
@@ -21,6 +19,10 @@ const Show = (props) => {
         const {name, title, image, _id} = editForm
         props.updatePeople({name, title, image }, _id);
     };
+    const handleRemovePerson = (id) => {
+        props.deletePeople(id);
+        props.history.push('/');
+    }
     return (
     <div className = "person">
         <h1>{person.name}</h1>
@@ -30,6 +32,7 @@ const Show = (props) => {
             ? <img src = {person.image} alt = {person.name}/>
             : <img src = {avatarURL} alt = "placeholder"/>
         }
+        <button onClick={() =>handleRemovePerson(person._id)}>Delete This Person</button>
         <form onSubmit={handleSubmit}>
             <input name = "name" 
                type = 'text'
